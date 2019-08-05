@@ -1,6 +1,9 @@
 import React from 'react';
 
 import TodoList from './components/TodoComponents/TodoList'
+import TodoForm from './components/TodoComponents/TodoForm'
+
+import './App.scss'
 
 const todos = [
   {
@@ -26,11 +29,54 @@ class App extends React.Component {
     }
   }
 
+  toggleTodo = id => {
+    this.setState({
+      todos: this.state.todos.map(todo => {
+        if(todo.id === id) {
+          return {
+            ...todo,
+            completed: !todo.completed
+          };
+        }
+        else {
+          return todo
+        }
+      })
+    })
+  }
+  
+  clearSelected = () => {
+    this.setState({
+      todos: this.state.todos.filter(todo => !todo.completed)
+    });
+  };
+
+  addTodo = todoName => {
+    const newTodo = {
+      task: todoName,
+      id: Date.now(),
+      completed: false
+    };
+    this.setState({
+      todos: [...this.state.todos, newTodo]
+    });
+  };
+
   render() {
     return (
-      <div>
-        <h2>Welcome to your Todo App!</h2>
-        <TodoList todos={todos}/>
+      <div className='container'>
+        <h2 className='header'>Welcome to your Todo App!</h2>
+        <TodoList
+          todos={this.state.todos}
+          toggleTodo={this.toggleTodo}
+          clearSelected={this.clearSelected}
+        />
+        <div className='btns'>
+          <button className="clear-btn" onClick={this.clearSelected}>
+            Clear Selected
+          </button>
+          <TodoForm addTodo={this.addTodo}/>
+        </div>
       </div>
     );
   }

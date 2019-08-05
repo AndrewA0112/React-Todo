@@ -1,0 +1,19 @@
+// Main Blue 078AC3
+// Dark Blue 035172
+// Dark Middle 046792
+// Light Middle 2997C7
+// Light Blue 4FA8CF
+
+.todo {
+    background: #078AC3;
+    width: 45%;
+    border: 1px solid black;
+    margin: 10px;
+    text-align: center;
+
+}
+
+.todo.completed {
+    text-decoration: line-through;
+    background: #4FA8CF
+}

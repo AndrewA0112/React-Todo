@@ -1,0 +1,33 @@
+.addForm {
+    display: flex;
+
+    .add-input {
+        border-radius: 10px;
+        border: 1px solid transparent;
+        margin-right: 10px;
+        padding: 4px;
+        margin: 1px;
+
+        &:focus {
+            outline: none;
+            border: 1px solid black;
+        }
+    }
+
+    .btn {
+        border: none;
+        background: #4FA8CF;
+        border-radius: 10px;
+        width: 100%;
+        margin-left: 5px;
+    
+        &:focus {
+            outline: none;
+        }
+    
+        &:hover {
+            border: 1px;
+            background: rgba($color: #4FA8CF, $alpha: 0.6)
+        }
+    }
+}

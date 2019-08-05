@@ -12,7 +12,8 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      todos: JSON.parse(localStorage.getItem('todos')) || []
+      todos: JSON.parse(localStorage.getItem('todos')) || [],
+      filter: ''
     }
   }
 
@@ -62,11 +63,18 @@ class App extends React.Component {
     }
   };
 
+  searchTodo = searchFilter => {
+    this.setState({
+      filter: searchFilter
+    })
+  }
+
   render() {
     return (
       <div className='container'>
         <h2 className='header'>Welcome to your Todo App!</h2>
         <TodoList
+          filter={this.state.filter}
           todos={this.state.todos}
           toggleTodo={this.toggleTodo}
           clearSelected={this.clearSelected}
@@ -75,7 +83,7 @@ class App extends React.Component {
           <button className="clear-btn" onClick={this.clearSelected}>
             Clear Selected
           </button>
-          <TodoForm addTodo={this.addTodo}/>
+          <TodoForm addTodo={this.addTodo} searchTodo={this.searchTodo}/>
         </div>
       </div>
     );

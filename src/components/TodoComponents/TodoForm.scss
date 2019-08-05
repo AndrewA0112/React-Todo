@@ -14,11 +14,12 @@
         }
     }
 
-    .add-btn {
+    .btn {
         border: none;
         background: #4FA8CF;
         border-radius: 10px;
         width: 100%;
+        margin-left: 5px;
     
         &:focus {
             outline: none;

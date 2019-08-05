@@ -5,19 +5,6 @@ import TodoForm from './components/TodoComponents/TodoForm'
 
 import './App.scss'
 
-const todos = [
-  {
-    task: 'Organize Garage',
-    id: 1528817077286,
-    completed: false
-  },
-  {
-    task: 'Bake Cookies',
-    id: 1528817084358,
-    completed: false
-  }
-];
-
 class App extends React.Component {
   // you will need a place to store your state in this component.
   // design `App` to be the parent component of your application.
@@ -25,7 +12,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      todos
+      todos: JSON.parse(localStorage.getItem('todos')) || []
     }
   }
 
@@ -49,6 +36,7 @@ class App extends React.Component {
     this.setState({
       todos: this.state.todos.filter(todo => !todo.completed)
     });
+    localStorage.setItem('todos', JSON.stringify(this.state.todos.filter(todo => !todo.completed)))
   };
 
   addTodo = todoName => {
@@ -57,9 +45,21 @@ class App extends React.Component {
       id: Date.now(),
       completed: false
     };
-    this.setState({
-      todos: [...this.state.todos, newTodo]
-    });
+    const todoEntries = JSON.parse(localStorage.getItem('todos')) || [];
+    if(this.state.todos === null){
+      this.setState({
+        todos: [newTodo]
+      });
+      todoEntries.push(newTodo)
+      localStorage.setItem('todos', JSON.stringify(todoEntries))
+    }
+    else {
+      this.setState({
+        todos: [...this.state.todos, newTodo]
+      });
+      todoEntries.push(newTodo)
+      localStorage.setItem('todos', JSON.stringify(todoEntries))
+    }
   };
 
   render() {

@@ -21,8 +21,10 @@ class TodoForm extends React.Component {
         e.preventDefault();
         if(this.state.todo !== ''){
             this.props.addTodo(this.state.todo);
+            this.props.searchTodo('')
             this.setState({
-                todo: ''
+                todo: '',
+                filter: ''
             })
         }
         else {
